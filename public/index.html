@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Robot Manipulator Management System</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🤖</text></svg>" />
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+
+  <!-- ========================= LOGIN ========================= -->
+  <div id="loginView" class="login-wrap">
+    <div class="login-card">
+      <div class="logo"><span class="mark">🤖</span><h1>RMMS</h1></div>
+      <p class="sub">Robot Manipulator Management System</p>
+
+      <div class="tabs">
+        <button id="tabLogin" class="active" type="button">Sign in</button>
+        <button id="tabRegister" type="button">Register</button>
+      </div>
+
+      <form id="authForm">
+        <div id="nameField" style="display:none;">
+          <label for="name">Full name</label>
+          <input id="name" type="text" autocomplete="name" />
+        </div>
+        <label for="email">Email</label>
+        <input id="email" type="email" autocomplete="email" value="admin@rmms.io" />
+        <label for="password">Password</label>
+        <input id="password" type="password" autocomplete="current-password" value="admin123" />
+        <label class="show-pwd"><input type="checkbox" id="showPwd" /> Show password</label>
+        <div class="error-msg" id="authError"></div>
+        <button class="btn primary" type="submit" style="width:100%; justify-content:center; margin-top:8px;" id="authSubmit">Sign in</button>
+      </form>
+
+      <p class="hint">
+        <b>Demo accounts</b><br />
+        Admin &nbsp;— admin@rmms.io / admin123<br />
+        User &nbsp;&nbsp;— aaron@rmms.io / aaron123
+      </p>
+    </div>
+  </div>
+
+  <!-- ========================= APP ========================= -->
+  <div id="appView" class="app">
+    <aside class="sidebar">
+      <div class="brand"><span class="mark">🤖</span><b>RMMS</b></div>
+      <div class="nav-item active" data-view="dashboard"><span class="ic">📊</span> Dashboard</div>
+      <div class="nav-item" data-view="robots"><span class="ic">🦾</span> Robots</div>
+      <div class="nav-item" data-view="reservations"><span class="ic">📅</span> Reservations</div>
+      <div id="adminNav" style="display:none;">
+        <div class="nav-section">Administration</div>
+        <div class="nav-item" data-view="manage"><span class="ic">🛠️</span> Manage Fleet</div>
+        <div class="nav-item" data-view="users"><span class="ic">👥</span> Users</div>
+      </div>
+    </aside>
+
+    <div class="main">
+      <div class="topbar">
+        <h2 id="viewTitle">Dashboard</h2>
+        <div class="user">
+          <span id="userName"></span>
+          <span class="role-tag" id="userRole"></span>
+          <div class="avatar" id="userAvatar">A</div>
+          <button class="btn small" id="logoutBtn">Logout</button>
+        </div>
+      </div>
+
+      <div class="content">
+        <section id="view-dashboard" class="view active"></section>
+        <section id="view-robots" class="view"></section>
+        <section id="view-reservations" class="view"></section>
+        <section id="view-manage" class="view"></section>
+        <section id="view-users" class="view"></section>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========================= MODAL ========================= -->
+  <div class="modal-backdrop" id="modalBackdrop">
+    <div class="modal">
+      <div class="modal-head">
+        <h3 id="modalTitle">Title</h3>
+        <button class="close-x" id="modalClose">&times;</button>
+      </div>
+      <div class="modal-body" id="modalBody"></div>
+      <div class="modal-foot" id="modalFoot"></div>
+    </div>
+  </div>
+
+  <div id="toast"></div>
+
+  <script src="js/api.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>

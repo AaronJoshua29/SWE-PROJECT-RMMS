@@ -1,0 +1,17 @@
+flowchart TD
+  start([User logs in]) --> dash[View dashboard & fleet status]
+  dash --> browse[Browse / filter robots]
+  browse --> pick{Robot available?}
+  pick -- No --> browse
+  pick -- Yes --> detail[Open robot details]
+  detail --> reserve[Reserve robot<br/>status → in_use]
+  reserve --> use[Use robot for experiment]
+  use --> release[Release robot<br/>log operating hours]
+  release --> wear[System recomputes wear level]
+  wear --> check{Wear ≥ threshold?}
+  check -- No --> free[Status → free, available again]
+  check -- Yes --> alert[Flagged on service-priority list]
+  alert --> maint[Admin logs maintenance]
+  maint --> reset[Wear clock reset<br/>status → free]
+  free --> done([End])
+  reset --> done

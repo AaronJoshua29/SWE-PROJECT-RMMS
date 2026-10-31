@@ -1,0 +1,32 @@
+flowchart LR
+  user(("👤<br/>Lab User"))
+  admin(("👤<br/>Administrator"))
+
+  subgraph RMMS["Robot Manipulator Management System"]
+    uc1(["Register / Login"])
+    uc2(["View dashboard & fleet status"])
+    uc3(["Search / filter robots"])
+    uc4(["View robot details & wear"])
+    uc5(["Reserve a free robot"])
+    uc6(["Release a robot & log hours"])
+    uc7(["View own reservations"])
+    uc8(["Add / edit / delete robot"])
+    uc9(["Log maintenance / reset wear"])
+    uc10(["Manage users & roles"])
+    uc11(["View all reservations"])
+  end
+
+  user --- uc1
+  user --- uc2
+  user --- uc3
+  user --- uc4
+  user --- uc5
+  user --- uc6
+  user --- uc7
+
+  admin --- uc2
+  admin --- uc4
+  admin --- uc8
+  admin --- uc9
+  admin --- uc10
+  admin --- uc11

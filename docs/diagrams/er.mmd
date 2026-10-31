@@ -1,0 +1,58 @@
+erDiagram
+  USERS ||--o{ RESERVATIONS : "makes"
+  ROBOTS ||--o{ RESERVATIONS : "booked_in"
+  ROBOTS ||--o{ MAINTENANCE_LOGS : "has"
+  USERS ||--o{ MAINTENANCE_LOGS : "performs"
+
+  USERS {
+    int id PK
+    string name
+    string email UK
+    string password_hash
+    string salt
+    string role "user | admin"
+    datetime created_at
+  }
+
+  ROBOTS {
+    int id PK
+    string name
+    string model
+    string manufacturer
+    string serial_number UK
+    string category
+    string location
+    string status "free|in_use|maintenance|offline"
+    float payload_kg
+    int reach_mm
+    int dof
+    date installed_date
+    float total_operating_hours
+    float service_interval_hours
+    float last_service_hours
+    float wear_level
+  }
+
+  RESERVATIONS {
+    int id PK
+    int robot_id FK
+    int user_id FK
+    string purpose
+    datetime start_time
+    datetime end_time
+    float expected_hours
+    float logged_hours
+    string status "active|completed|cancelled"
+  }
+
+  MAINTENANCE_LOGS {
+    int id PK
+    int robot_id FK
+    int technician_id FK
+    string type
+    string description
+    datetime performed_at
+    float hours_at_service
+    float cost
+    bool resets_wear
+  }

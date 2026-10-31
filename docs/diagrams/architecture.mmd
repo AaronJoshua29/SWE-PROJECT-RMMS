@@ -1,0 +1,27 @@
+flowchart TB
+  subgraph Client["Presentation Tier — Browser (SPA)"]
+    UI["HTML / CSS views<br/>index.html · styles.css"]
+    JS["app.js controller<br/>api.js (fetch + JWT)"]
+  end
+
+  subgraph Server["Application Tier — Node.js / Express"]
+    MW["Middleware<br/>express.json · authenticate"]
+    AuthR["/api/auth<br/>register · login · me"]
+    RobotR["/api/robots<br/>CRUD · reserve · release · maintenance"]
+    ResR["/api/reservations"]
+    UserR["/api/users"]
+    StatR["/api/stats"]
+    Helpers["helpers.js<br/>wear model · validation"]
+    AuthLib["auth.js<br/>scrypt · HMAC tokens"]
+  end
+
+  subgraph Data["Data Tier"]
+    DB[("SQLite database<br/>users · robots<br/>reservations · maintenance_logs")]
+  end
+
+  UI --> JS
+  JS -- "HTTPS / JSON (REST)" --> MW
+  MW --> AuthR & RobotR & ResR & UserR & StatR
+  AuthR --> AuthLib
+  RobotR --> Helpers
+  AuthR & RobotR & ResR & UserR & StatR -- "prepared SQL" --> DB

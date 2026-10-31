@@ -1,0 +1,64 @@
+classDiagram
+  class User {
+    +int id
+    +string name
+    +string email
+    -string password_hash
+    -string salt
+    +string role
+    +datetime created_at
+    +register()
+    +login()
+  }
+
+  class Robot {
+    +int id
+    +string name
+    +string model
+    +string manufacturer
+    +string serial_number
+    +string category
+    +string location
+    +string status
+    +float payload_kg
+    +int reach_mm
+    +int dof
+    +float total_operating_hours
+    +float service_interval_hours
+    +float last_service_hours
+    +float wear_level
+    +computeWear() float
+    +reserve(user)
+    +release(hours)
+  }
+
+  class Reservation {
+    +int id
+    +int robot_id
+    +int user_id
+    +string purpose
+    +datetime start_time
+    +datetime end_time
+    +float expected_hours
+    +float logged_hours
+    +string status
+    +complete()
+    +cancel()
+  }
+
+  class MaintenanceLog {
+    +int id
+    +int robot_id
+    +int technician_id
+    +string type
+    +string description
+    +datetime performed_at
+    +float hours_at_service
+    +float cost
+    +bool resets_wear
+  }
+
+  User "1" --> "0..*" Reservation : makes
+  Robot "1" --> "0..*" Reservation : is booked in
+  Robot "1" --> "0..*" MaintenanceLog : has
+  User "1" --> "0..*" MaintenanceLog : performs (technician)

@@ -1,0 +1,24 @@
+sequenceDiagram
+  actor U as Lab User
+  participant B as Browser (app.js)
+  participant A as Express API
+  participant Au as auth.js
+  participant DB as SQLite
+
+  U->>B: Click "Reserve" on a free robot
+  B->>A: POST /api/robots/:id/reserve (Bearer token)
+  A->>Au: verify(token)
+  Au-->>A: payload { sub, role } OK
+  A->>DB: SELECT robot WHERE id = :id
+  DB-->>A: robot row
+  alt robot.status == 'free'
+    A->>DB: BEGIN TXN
+    A->>DB: INSERT reservation (active)
+    A->>DB: UPDATE robot SET status = 'in_use'
+    A->>DB: COMMIT
+    A-->>B: 201 Created { robot: in_use }
+    B-->>U: Toast "Robot reserved" + refresh view
+  else robot not free
+    A-->>B: 409 Conflict { error }
+    B-->>U: Error toast
+  end

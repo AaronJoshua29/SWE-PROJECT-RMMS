@@ -1,0 +1,25 @@
+{
+  "name": "robot-manipulator-management-system",
+  "version": "1.0.0",
+  "description": "A web-based management system to monitor, reserve and maintain robotic manipulators in a shared laboratory.",
+  "author": "Aaron Joshua (24BRS1393), VIT Chennai",
+  "license": "MIT",
+  "type": "commonjs",
+  "main": "server/index.js",
+  "scripts": {
+    "start": "node --no-warnings server/index.js",
+    "dev": "node --no-warnings --watch server/index.js",
+    "seed": "node --no-warnings server/seed.js --reset",
+    "test": "node --no-warnings test/api.test.js",
+    "e2e": "node --no-warnings test/e2e.selenium.js"
+  },
+  "engines": {
+    "node": ">=22.5.0"
+  },
+  "dependencies": {
+    "express": "^4.19.2"
+  },
+  "devDependencies": {
+    "selenium-webdriver": "^4.51.0"
+  }
+}

@@ -1,0 +1,20 @@
+# Dependencies
+node_modules/
+
+# Runtime database (created on first launch)
+data/
+*.db
+*.sqlite
+
+# Environment
+.env
+
+# Logs
+*.log
+npm-debug.log*
+
+# OS / editor
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
